@@ -3,7 +3,9 @@ import LosPrediales from './components/LosPrediales.vue';
 </script>
 
 <template>
-  <LosPrediales />
+  <main class="container">
+    <LosPrediales />
+  </main>
 </template>
 
 <style scoped></style>

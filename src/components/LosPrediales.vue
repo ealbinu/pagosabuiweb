@@ -1,9 +1,13 @@
 <template>
   <h2>Prediales</h2>
-  <template v-for="(item, index) in inmuebles">
-    <h3>{{ item.nombre }}</h3>
-    <RequestPrediales :cuenta="item.cuenta" />
-  </template>
+  <div class="grid">
+    <template v-for="(item, index) in inmuebles">
+      <article>
+        <h3>{{ item.nombre }}</h3>
+        <RequestPrediales :cuenta="item.cuenta" />
+      </article>
+    </template>
+  </div>
 </template>
 <script setup>
 import RequestPrediales from './RequestPrediales.vue';

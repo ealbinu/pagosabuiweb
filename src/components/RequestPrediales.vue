@@ -1,7 +1,7 @@
 <template>
   <p>Cuenta: {{ cuenta }}</p>
-  <div class="loading" v-if="loading">Cargando...</div>
-  <div class="porpagar">
+  <div class="loading" v-if="loading" aria-busy="true">Cargando...</div>
+  <div class="grid">
     <div>
       <h4>Vencidos</h4>
       <!--
@@ -28,23 +28,26 @@ import axios from 'axios';
 const props = defineProps(['cuenta']);
 const loading = ref(true);
 const vencidos = ref([]);
+const vigentes = ref([]);
 
 const loads = async () => {
   let api = 'https://ovica.finanzas.cdmx.gob.mx/ovica-backend/public/api/v1';
-  const dataVen = await .get(api+'/adeudos/vencido/' + props.cuenta );
-  const dataVig = await .get(api+'/adeudos/vigente/' + props.cuenta );
-  /*
-  axios
-    .get(
-      'https://ovica.finanzas.cdmx.gob.mx/ovica-backend/public/api/v1/adeudos/vencido/' +
-        props.cuenta
-    )
-    .then((res) => {
-      vencidos = res.data;
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
-    */
-}
+  const dataVen = null;
+  const dataVig = null;
+  try {
+    dataVen = await axios.get(api + '/adeudos/vencido/' + props.cuenta);
+  } catch {}
+  try {
+    dataVig = await axios.get(api + '/adeudos/vigente/' + props.cuenta);
+  } catch {}
+  loading.value = false;
+  if (dataVen) {
+    vencidos.value = dataVen.data;
+  }
+  if (dataVig) {
+    vigentes.value = dataVig.data;
+  }
+  console.log(loading.value);
+};
+loads();
 </script>
