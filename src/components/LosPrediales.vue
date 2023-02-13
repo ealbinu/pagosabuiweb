@@ -2,8 +2,8 @@
   <h2>Prediales</h2>
   <div class="grid">
     <template v-for="(item, index) in inmuebles">
-      <article>
-        <h3>{{ item.nombre }}</h3>
+      <article class="predial">
+        <h5>{{ item.nombre }}</h5>
         <RequestPrediales :cuenta="item.cuenta" />
       </article>
     </template>
