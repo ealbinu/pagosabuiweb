@@ -8,3 +8,9 @@
   width: 340px;
   margin: 0;
 }
+
+[role='button'] {
+  margin: 2px !important;
+  padding: 6px 2px !important;
+  font-size: 0.8rem !important;
+}
