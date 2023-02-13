@@ -44,14 +44,12 @@ const loads = async () => {
       api + '/api/v1/adeudos/vigente/' + props.cuenta
     );
     vigentes.value = res.data;
-
   } catch {}
   try {
     const res = await axios.get(
       api + '/api/v1/adeudos/vencido/' + props.cuenta
     );
     vencidos.value = res.data;
-
   } catch {}
   loading.value = false;
 };
@@ -62,8 +60,11 @@ const formato = async (item) => {
     adeudos: [{ ...item, checked: true }],
     ctapredial: props.cuenta,
   });
-  const formato = await axios.post(api + '/formatos/pago/generaFUT', {
+  const linea = await axios.patch(api + '/api/v1/adeudos/lc', {
     token: res.data.resumen.lc_token,
+  });
+  const formato = await axios.post(api + '/formatos/pago/generaFUT', {
+    token: linea.data.token_fut,
   });
   console.log(formato);
   /*
